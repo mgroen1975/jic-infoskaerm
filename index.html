@@ -2,55 +2,297 @@
 <html lang="da">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jetsmark Idrætscenter – Infoskærm</title>
 <style>
-:root{--navy:#0d2f4f;--blue:#1d83c6;--line:#d8e7f1;--muted:#61788a;--green:#14784c}
+:root{
+  --navy:#0d2f4f;
+  --blue:#3276c3;
+  --line:#d8e7f1;
+  --muted:#61788a;
+  --green:#14784c;
+  --scale:1;
+}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#dfeaf2;color:var(--navy)}
-body{display:grid;place-items:center}
-.screen{width:min(100vw,calc(100vh * 9 / 16));height:min(100vh,calc(100vw * 16 / 9));aspect-ratio:9/16;background:linear-gradient(180deg,#f8fcff 0%,#edf7fd 48%,#f8fcff 100%);display:grid;grid-template-rows:1fr 1fr;overflow:hidden}
-.half{min-height:0;padding:2.2% 3%;display:grid;grid-template-rows:auto 1fr;gap:1.4%}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#dfeaf2;
+  color:var(--navy);
+}
+#stage{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:calc(1080px * var(--scale));
+  height:calc(1920px * var(--scale));
+  transform:translate(-50%,-50%);
+  overflow:hidden;
+}
+.screen{
+  width:1080px;
+  height:1920px;
+  transform:scale(var(--scale));
+  transform-origin:top left;
+  background:linear-gradient(180deg,#f8fcff 0%,#edf7fd 48%,#f8fcff 100%);
+  display:grid;
+  grid-template-rows:960px 960px;
+  overflow:hidden;
+}
+.half{
+  min-height:0;
+  padding:26px 36px 24px;
+  display:grid;
+  grid-template-rows:auto 1fr;
+  gap:16px;
+}
 .half+.half{border-top:2px solid #d4e6f1}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem}
-.eyebrow{margin:0 0 .2em;color:var(--blue);font-size:clamp(9px,1vw,18px);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-h1,h2{margin:0;letter-spacing:-.035em}h1{font-size:clamp(25px,3.6vw,62px);line-height:.95}h2{font-size:clamp(26px,3.7vw,62px);line-height:.95}
-.subline{margin:.35em 0 0;color:var(--muted);font-size:clamp(8px,1vw,18px);font-weight:600}
-.badge{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.55em .9em;font-size:clamp(8px,1vw,17px);font-weight:800;box-shadow:0 8px 24px rgba(13,47,79,.08);white-space:nowrap}
-.badge.live{color:var(--green);background:#e8f8ef;border-color:#d4efdf}
-.week-grid{min-height:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:1.25%}
-.day-card{min-width:0;min-height:0;background:#fff;border:1px solid rgba(13,47,79,.08);border-radius:20px;box-shadow:0 8px 24px rgba(13,47,79,.09);padding:6% 6% 5%;overflow:hidden;position:relative;display:flex;flex-direction:column}
-.day-card:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--accent,#6eb5e0)}
-.day-card h3{margin:0;font-size:clamp(14px,1.8vw,31px);letter-spacing:-.03em;line-height:1}
-.day-date{margin:.35em 0 .65em;color:var(--muted);font-size:clamp(7px,.82vw,14px);font-weight:700}
-.bookings{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:.32em}
-.booking{display:grid;grid-template-columns:auto 1fr;column-gap:.45em;padding:.32em 0;border-bottom:1px solid #edf2f5;font-size:clamp(7px,.82vw,14px);line-height:1.14}
+.section-head{
+  min-height:112px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+}
+.eyebrow{
+  margin:0 0 7px;
+  color:var(--blue);
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+h1,h2{margin:0;letter-spacing:-.035em;line-height:.94}
+h1{font-size:62px}
+h2{font-size:66px}
+.subline{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:19px;
+  font-weight:700;
+}
+.badge{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:12px 20px;
+  font-size:18px;
+  font-weight:800;
+  box-shadow:0 8px 24px rgba(13,47,79,.08);
+  white-space:nowrap;
+  margin-bottom:6px;
+}
+.badge.live{
+  color:var(--green);
+  background:#e8f8ef;
+  border-color:#d4efdf;
+}
+
+/* UGEOVERSIGT */
+.week-grid{
+  min-height:0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:repeat(2,1fr);
+  gap:16px;
+}
+.day-card{
+  min-width:0;
+  min-height:0;
+  background:#fff;
+  border:1px solid rgba(13,47,79,.08);
+  border-radius:24px;
+  box-shadow:0 8px 24px rgba(13,47,79,.09);
+  padding:22px 16px 14px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.day-card:before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:6px;
+  background:var(--accent,#6eb5e0);
+}
+.day-card h3{
+  margin:0;
+  font-size:34px;
+  letter-spacing:-.04em;
+  line-height:1;
+}
+.day-date{
+  margin:7px 0 12px;
+  color:var(--muted);
+  font-size:16px;
+  font-weight:700;
+}
+.bookings{
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.booking{
+  flex:0 0 auto;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  column-gap:7px;
+  padding:8px 0;
+  border-bottom:1px solid #edf2f5;
+  font-size:16px;
+  line-height:1.15;
+}
 .booking:last-child{border-bottom:0}
-.booking-time{font-weight:900;color:var(--blue);white-space:nowrap}
+.booking-time{
+  font-weight:900;
+  color:var(--blue);
+  white-space:nowrap;
+}
 .booking-main{min-width:0}
-.booking-title{font-weight:800;color:#173953;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.booking-resource{margin-top:.12em;color:#697f90;font-size:.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.empty{color:#8a9aa7;font-size:clamp(7px,.8vw,14px);font-style:italic;padding-top:.2em}
-.note-card textarea{width:100%;height:100%;resize:none;border:0;outline:0;background:#f7fbfe;border-radius:10px;padding:.7em;font:inherit;font-size:clamp(8px,.9vw,15px);color:#355166}
-.source-week{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
-.panel{min-height:0;background:#fff;border:1px solid rgba(13,47,79,.08);border-radius:24px;box-shadow:0 12px 34px rgba(13,47,79,.10);overflow:hidden}
-.panel-title{padding:1.25% 2%;background:linear-gradient(90deg,#e5f5ff,#f8fcff);border-bottom:1px solid var(--line);font-size:clamp(10px,1.2vw,21px);font-weight:800;color:#37566d}
-.conventus-output{height:calc(100% - 3.4em);padding:1% 1.5% 1.5%;overflow:hidden}
-.conventus-output,.conventus-output *{font-family:Arial,Helvetica,sans-serif!important;box-sizing:border-box!important}
-.conventus-output table{width:100%!important;max-width:100%!important;border-collapse:separate!important;border-spacing:0 4px!important;background:transparent!important;border:0!important}
+.booking-title{
+  font-weight:800;
+  color:#173953;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.booking-resource{
+  margin-top:2px;
+  color:#697f90;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.empty{
+  color:#8a9aa7;
+  font-size:15px;
+  font-style:italic;
+  padding-top:4px;
+}
+/* Automatisk komprimering ved mange bookinger */
+.day-card.dense .booking{font-size:14px;padding:5px 0;column-gap:5px}
+.day-card.dense .booking-resource{font-size:12px}
+.day-card.dense h3{font-size:31px}
+.day-card.dense .day-date{margin-bottom:8px}
+.day-card.very-dense .booking{font-size:12px;padding:3px 0;column-gap:4px;line-height:1.05}
+.day-card.very-dense .booking-resource{font-size:10.5px;margin-top:1px}
+.day-card.very-dense h3{font-size:29px}
+.day-card.very-dense .day-date{font-size:14px;margin:5px 0 6px}
+.note-card textarea{
+  width:100%;
+  height:100%;
+  resize:none;
+  border:0;
+  outline:0;
+  background:#f7fbfe;
+  border-radius:14px;
+  padding:12px;
+  font:inherit;
+  font-size:17px;
+  color:#355166;
+}
+.source-week{
+  position:absolute!important;
+  left:-10000px!important;
+  top:-10000px!important;
+  width:900px!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+
+/* DAGENS BOOKINGER */
+.panel{
+  min-height:0;
+  background:#fff;
+  border:1px solid rgba(13,47,79,.08);
+  border-radius:28px;
+  box-shadow:0 12px 34px rgba(13,47,79,.10);
+  overflow:hidden;
+  display:grid;
+  grid-template-rows:58px 1fr;
+}
+.panel-title{
+  padding:15px 20px;
+  background:linear-gradient(90deg,#e5f5ff,#f8fcff);
+  border-bottom:1px solid var(--line);
+  font-size:22px;
+  font-weight:800;
+  color:#37566d;
+}
+.conventus-output{
+  min-height:0;
+  padding:12px 16px 16px;
+  overflow:hidden;
+}
+.conventus-output,.conventus-output *{
+  font-family:Arial,Helvetica,sans-serif!important;
+  box-sizing:border-box!important;
+}
+.conventus-output table{
+  width:100%!important;
+  max-width:100%!important;
+  border-collapse:separate!important;
+  border-spacing:0 5px!important;
+  background:transparent!important;
+  border:0!important;
+}
 .conventus-output thead,.conventus-output th{background:transparent!important}
-.conventus-output th{padding:7px 9px!important;color:#607689!important;font-size:clamp(8px,.92vw,16px)!important;text-align:left!important;border:0!important}
-.conventus-output td{padding:8px 9px!important;font-size:clamp(8px,.95vw,17px)!important;line-height:1.15!important;border-top:1px solid #e3edf4!important;border-bottom:1px solid #e3edf4!important;background:#f8fbfd!important;color:#15344f!important;vertical-align:top!important}
-.conventus-output tr td:first-child{border-left:1px solid #e3edf4!important;border-radius:9px 0 0 9px!important}.conventus-output tr td:last-child{border-right:1px solid #e3edf4!important;border-radius:0 9px 9px 0!important}
-.conventus-output a{color:var(--blue)!important;text-decoration:none!important;font-weight:700!important}.conventus-output img{max-height:22px!important;width:auto!important}
-@media(max-width:650px){.day-card{border-radius:13px}.panel{border-radius:16px}.half{padding:2% 2.5%}.badge{padding:.4em .65em}}
+.conventus-output th{
+  padding:8px 10px!important;
+  color:#607689!important;
+  font-size:16px!important;
+  text-align:left!important;
+  border:0!important;
+}
+.conventus-output td{
+  padding:10px 11px!important;
+  font-size:17px!important;
+  line-height:1.18!important;
+  border-top:1px solid #e3edf4!important;
+  border-bottom:1px solid #e3edf4!important;
+  background:#f8fbfd!important;
+  color:#15344f!important;
+  vertical-align:top!important;
+}
+.conventus-output tr td:first-child{
+  border-left:1px solid #e3edf4!important;
+  border-radius:10px 0 0 10px!important;
+}
+.conventus-output tr td:last-child{
+  border-right:1px solid #e3edf4!important;
+  border-radius:0 10px 10px 0!important;
+}
+.conventus-output a{
+  color:var(--blue)!important;
+  text-decoration:none!important;
+  font-weight:700!important;
+}
+.conventus-output img{max-height:24px!important;width:auto!important}
+/* Komprimer dagens tabel automatisk hvis den er for høj */
+.conventus-output.dense table{border-spacing:0 3px!important}
+.conventus-output.dense th{padding:5px 7px!important;font-size:14px!important}
+.conventus-output.dense td{padding:6px 8px!important;font-size:14px!important;line-height:1.1!important}
+.conventus-output.very-dense table{border-spacing:0 2px!important}
+.conventus-output.very-dense th{padding:3px 6px!important;font-size:12px!important}
+.conventus-output.very-dense td{padding:4px 6px!important;font-size:12px!important;line-height:1.05!important}
 </style>
 </head>
 <body>
+<div id="stage">
 <main class="screen">
   <section class="half week-half">
     <div class="section-head">
-      <div><p class="eyebrow">Jetsmark Idrætscenter</p><h1>Denne uge · <span id="week-number">Uge 44</span></h1><p class="subline">Klokkeslæt · Titel · Ressource</p></div>
+      <div>
+        <p class="eyebrow">Jetsmark Idrætscenter</p>
+        <h1>Denne uge · <span id="week-number">Uge 44</span></h1>
+        <p class="subline">Klokkeslæt · Titel · Ressource</p>
+      </div>
       <div class="badge">UGEOVERSIGT</div>
     </div>
 
@@ -62,7 +304,7 @@ h1,h2{margin:0;letter-spacing:-.035em}h1{font-size:clamp(25px,3.6vw,62px);line-h
       <article class="day-card" data-day="fredag" style="--accent:#e46f7a"><h3>Fredag</h3><div class="day-date" data-date="fredag"></div><div class="bookings" data-bookings="fredag"><div class="empty">Henter bookinger…</div></div></article>
       <article class="day-card" data-day="lørdag" style="--accent:#38a9c5"><h3>Lørdag</h3><div class="day-date" data-date="lørdag"></div><div class="bookings" data-bookings="lørdag"><div class="empty">Henter bookinger…</div></div></article>
       <article class="day-card" data-day="søndag" style="--accent:#52a96b"><h3>Søndag</h3><div class="day-date" data-date="søndag"></div><div class="bookings" data-bookings="søndag"><div class="empty">Henter bookinger…</div></div></article>
-      <article class="day-card note-card" style="--accent:#7f8c99"><h3>Noter</h3><div class="day-date">Egne informationer</div><textarea aria-label="Noter" placeholder="Noter og praktiske beskeder…"></textarea></article>
+      <article class="day-card note-card" style="--accent:#7f8c99"><h3>Noter</h3><div class="day-date">Egne informationer</div><textarea id="notes" aria-label="Noter" placeholder="Noter og praktiske beskeder…"></textarea></article>
     </div>
 
     <div class="source-week" id="week-source" aria-hidden="true">
@@ -72,7 +314,11 @@ h1,h2{margin:0;letter-spacing:-.035em}h1{font-size:clamp(25px,3.6vw,62px);line-h
 
   <section class="half today-half">
     <div class="section-head">
-      <div><p class="eyebrow">Aktuelle bookinger</p><h2>Dagen i dag</h2><p class="subline" id="today-date">Henter dagens dato…</p></div>
+      <div>
+        <p class="eyebrow">Aktuelle bookinger</p>
+        <h2>Dagen i dag</h2>
+        <p class="subline" id="today-date">Henter dagens dato…</p>
+      </div>
       <div class="badge live">● LIVE FRA CONVENTUS</div>
     </div>
     <div class="panel">
@@ -83,26 +329,161 @@ h1,h2{margin:0;letter-spacing:-.035em}h1{font-size:clamp(25px,3.6vw,62px);line-h
     </div>
   </section>
 </main>
+</div>
 <script>
 (function(){
   const TZ='Europe/Copenhagen';
   const days=['mandag','tirsdag','onsdag','torsdag','fredag','lørdag','søndag'];
-  const aliases={mandag:['mandag','monday'],tirsdag:['tirsdag','tuesday'],onsdag:['onsdag','wednesday'],torsdag:['torsdag','thursday'],fredag:['fredag','friday'],lørdag:['lørdag','lordag','saturday'],søndag:['søndag','sondag','sunday']};
+  const aliases={
+    mandag:['mandag','monday'],tirsdag:['tirsdag','tuesday'],onsdag:['onsdag','wednesday'],
+    torsdag:['torsdag','thursday'],fredag:['fredag','friday'],lørdag:['lørdag','lordag','saturday'],
+    søndag:['søndag','sondag','sunday']
+  };
 
-  function cp(){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23',weekday:'short'}).formatToParts(new Date());const o={};parts.forEach(p=>o[p.type]=p.value);return o}
-  function isoWeek(y,m,d){const x=new Date(Date.UTC(y,m-1,d));const wd=x.getUTCDay()||7;x.setUTCDate(x.getUTCDate()+4-wd);const ys=new Date(Date.UTC(x.getUTCFullYear(),0,1));return Math.ceil((((x-ys)/86400000)+1)/7)}
-  function effectiveMonday(){const p=cp();let d=new Date(Date.UTC(+p.year,+p.month-1,+p.day));const sunday=p.weekday==='Sun' && (+p.hour>0 || +p.minute>=1);if(sunday)d.setUTCDate(d.getUTCDate()+1);const wd=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()-(wd-1));return d}
-  function labels(){const mon=effectiveMonday();document.getElementById('week-number').textContent='Uge '+isoWeek(mon.getUTCFullYear(),mon.getUTCMonth()+1,mon.getUTCDate());days.forEach((day,i)=>{const d=new Date(mon);d.setUTCDate(mon.getUTCDate()+i);const el=document.querySelector('[data-date="'+day+'"]');if(el)el.textContent=new Intl.DateTimeFormat('da-DK',{day:'2-digit',month:'2-digit',timeZone:'UTC'}).format(d)});const t=new Intl.DateTimeFormat('da-DK',{timeZone:TZ,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());document.getElementById('today-date').textContent=t.charAt(0).toUpperCase()+t.slice(1)}
-  function norm(s){return (s||'').replace(/\s+/g,' ').trim()}
-  function whichDay(text){const s=norm(text).toLowerCase();for(const day of days){if(aliases[day].some(a=>s.includes(a)))return day}return null}
-  function isTime(s){return /\b\d{1,2}[:.]\d{2}\b/.test(s||'')}
-  function add(day,time,title,resource,seen){if(!day||!time||!title)return;const key=[day,time,title,resource].join('|');if(seen.has(key))return;seen.add(key);const box=document.querySelector('[data-bookings="'+day+'"]');if(!box)return;if(box.querySelector('.empty'))box.innerHTML='';const row=document.createElement('div');row.className='booking';row.innerHTML='<div class="booking-time"></div><div class="booking-main"><div class="booking-title"></div><div class="booking-resource"></div></div>';row.querySelector('.booking-time').textContent=time;row.querySelector('.booking-title').textContent=title;row.querySelector('.booking-resource').textContent=resource||'';box.appendChild(row)}
-  function parseWeek(){const root=document.getElementById('week-source');if(!root)return false;const seen=new Set();let current=null,count=0;root.querySelectorAll('table').forEach(table=>{let tableDay=whichDay((table.querySelector('caption')||{}).textContent||'');table.querySelectorAll('tr').forEach(tr=>{const txt=norm(tr.textContent);const rowDay=whichDay(txt);const cells=[...tr.cells].map(c=>norm(c.textContent)).filter(Boolean);if(rowDay && (tr.querySelector('th') || cells.length<=2)){current=rowDay;return}if(tableDay)current=tableDay;if(!current||cells.length<2)return;if(cells.some(c=>/^(tid|titel|ressource)$/i.test(c)))return;let ti=cells.findIndex(isTime);if(ti<0)return;const time=cells[ti];const title=cells[ti+1]||'';const resource=cells[ti+2]||cells[cells.length-1]||'';add(current,time,title,resource,seen);count++})});
-    if(!count){let currentDay=null;const lines=(root.innerText||'').split(/\n+/).map(norm).filter(Boolean);for(let i=0;i<lines.length;i++){const d=whichDay(lines[i]);if(d){currentDay=d;continue}if(currentDay&&isTime(lines[i])){add(currentDay,lines[i],lines[i+1]||'',lines[i+2]||'',seen);count++;i+=2}}}
-    if(count){days.forEach(day=>{const box=document.querySelector('[data-bookings="'+day+'"]');if(box&&!box.children.length)box.innerHTML='<div class="empty">Ingen bookinger</div>'});return true}return false
+  function scaleScreen(){
+    const s=Math.min(window.innerWidth/1080,window.innerHeight/1920);
+    document.documentElement.style.setProperty('--scale',String(s));
   }
-  labels();setInterval(labels,30000);
-  let tries=0;const timer=setInterval(()=>{tries++;if(parseWeek()||tries>20)clearInterval(timer)},500);
+  scaleScreen();
+  window.addEventListener('resize',scaleScreen);
+
+  function cp(){
+    const parts=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23',weekday:'short'}).formatToParts(new Date());
+    const o={};parts.forEach(p=>o[p.type]=p.value);return o;
+  }
+  function isoWeek(y,m,d){
+    const x=new Date(Date.UTC(y,m-1,d));
+    const wd=x.getUTCDay()||7;
+    x.setUTCDate(x.getUTCDate()+4-wd);
+    const ys=new Date(Date.UTC(x.getUTCFullYear(),0,1));
+    return Math.ceil((((x-ys)/86400000)+1)/7);
+  }
+  function effectiveMonday(){
+    const p=cp();
+    let d=new Date(Date.UTC(+p.year,+p.month-1,+p.day));
+    const sunday=p.weekday==='Sun' && (+p.hour>0 || +p.minute>=1);
+    if(sunday)d.setUTCDate(d.getUTCDate()+1);
+    const wd=d.getUTCDay()||7;
+    d.setUTCDate(d.getUTCDate()-(wd-1));
+    return d;
+  }
+  function labels(){
+    const mon=effectiveMonday();
+    document.getElementById('week-number').textContent='Uge '+isoWeek(mon.getUTCFullYear(),mon.getUTCMonth()+1,mon.getUTCDate());
+    days.forEach((day,i)=>{
+      const d=new Date(mon);d.setUTCDate(mon.getUTCDate()+i);
+      const el=document.querySelector('[data-date="'+day+'"]');
+      if(el)el.textContent=new Intl.DateTimeFormat('da-DK',{day:'2-digit',month:'2-digit',timeZone:'UTC'}).format(d);
+    });
+    const t=new Intl.DateTimeFormat('da-DK',{timeZone:TZ,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+    document.getElementById('today-date').textContent=t.charAt(0).toUpperCase()+t.slice(1);
+  }
+
+  function norm(s){return (s||'').replace(/\s+/g,' ').trim()}
+  function whichDay(text){
+    const s=norm(text).toLowerCase();
+    for(const day of days){if(aliases[day].some(a=>s.includes(a)))return day}
+    return null;
+  }
+  function isTime(s){return /\b\d{1,2}[:.]\d{2}\b/.test(s||'')}
+  function add(day,time,title,resource,seen){
+    if(!day||!time||!title)return;
+    const key=[day,time,title,resource].join('|');
+    if(seen.has(key))return;
+    seen.add(key);
+    const box=document.querySelector('[data-bookings="'+day+'"]');
+    if(!box)return;
+    if(box.querySelector('.empty'))box.innerHTML='';
+    const row=document.createElement('div');
+    row.className='booking';
+    row.innerHTML='<div class="booking-time"></div><div class="booking-main"><div class="booking-title"></div><div class="booking-resource"></div></div>';
+    row.querySelector('.booking-time').textContent=time;
+    row.querySelector('.booking-title').textContent=title;
+    row.querySelector('.booking-resource').textContent=resource||'';
+    box.appendChild(row);
+  }
+  function parseWeek(){
+    const root=document.getElementById('week-source');
+    if(!root)return 0;
+    const seen=new Set();
+    let current=null,count=0;
+
+    root.querySelectorAll('table').forEach(table=>{
+      const caption=table.querySelector('caption');
+      const tableDay=whichDay(caption?caption.textContent:'');
+      if(tableDay)current=tableDay;
+      table.querySelectorAll('tr').forEach(tr=>{
+        const cells=[...tr.cells].map(c=>norm(c.textContent)).filter(Boolean);
+        const txt=norm(tr.textContent);
+        const rowDay=whichDay(txt);
+        if(rowDay && (!cells.some(isTime) || tr.querySelector('th'))){current=rowDay;return}
+        if(!current||cells.length<2)return;
+        if(cells.some(c=>/^(tid|titel|ressource)$/i.test(c)))return;
+        const ti=cells.findIndex(isTime);
+        if(ti<0)return;
+        const time=cells[ti];
+        const title=cells[ti+1]||'';
+        const resource=cells[ti+2]||'';
+        add(current,time,title,resource,seen);
+        count++;
+      });
+    });
+
+    if(!count){
+      let currentDay=null;
+      const lines=(root.innerText||'').split(/\n+/).map(norm).filter(Boolean);
+      for(let i=0;i<lines.length;i++){
+        const d=whichDay(lines[i]);
+        if(d){currentDay=d;continue}
+        if(currentDay && isTime(lines[i])){
+          const time=lines[i];
+          const title=lines[i+1]||'';
+          const resource=lines[i+2]||'';
+          add(currentDay,time,title,resource,seen);
+          count++;
+          i+=2;
+        }
+      }
+    }
+    if(count)fitWeekCards();
+    return count;
+  }
+
+  function fitWeekCards(){
+    document.querySelectorAll('.day-card:not(.note-card)').forEach(card=>{
+      const box=card.querySelector('.bookings');
+      card.classList.remove('dense','very-dense');
+      if(box && box.scrollHeight>box.clientHeight+2)card.classList.add('dense');
+      if(box && box.scrollHeight>box.clientHeight+2)card.classList.add('very-dense');
+    });
+  }
+  function fitToday(){
+    const box=document.getElementById('today-bookings');
+    if(!box)return;
+    box.classList.remove('dense','very-dense');
+    if(box.scrollHeight>box.clientHeight+4)box.classList.add('dense');
+    if(box.scrollHeight>box.clientHeight+4)box.classList.add('very-dense');
+  }
+
+  labels();
+  setInterval(labels,30000);
+
+  let tries=0;
+  const parser=setInterval(()=>{
+    tries++;
+    if(parseWeek()||tries>=30)clearInterval(parser);
+    fitToday();
+  },500);
+  setTimeout(fitToday,1500);
+  setTimeout(fitToday,3000);
+
+  const notes=document.getElementById('notes');
+  try{
+    notes.value=localStorage.getItem('jic-infoskaerm-notes')||'';
+    notes.addEventListener('input',()=>localStorage.setItem('jic-infoskaerm-notes',notes.value));
+  }catch(e){}
+
+  // Opdater Conventus-data på en skærm, der står tændt hele dagen.
   setTimeout(()=>location.reload(),5*60*1000);
 })();
 </script>
