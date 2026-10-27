@@ -1,6 +1,22 @@
 (function(){
   function norm(s){return (s||'').replace(/\s+/g,' ').trim();}
 
+  function loadNextInfo(){
+    if(!document.getElementById('next-info-css')){
+      var link=document.createElement('link');
+      link.id='next-info-css';
+      link.rel='stylesheet';
+      link.href='next-info.css';
+      document.head.appendChild(link);
+    }
+    if(!document.getElementById('next-info-js')){
+      var script=document.createElement('script');
+      script.id='next-info-js';
+      script.src='next-info.js';
+      document.body.appendChild(script);
+    }
+  }
+
   function cleanKarlsvognen(){
     var root=document.getElementById('today-bookings');
     if(!root) return false;
@@ -33,6 +49,7 @@
     return true;
   }
 
+  loadNextInfo();
   var tries=0;
   var timer=setInterval(function(){
     tries++;
