@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Jetsmark Idrætscenter – Ugeoversigt Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <main class="screen">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="brand">JETSMARK IDRÆTSCENTER</div>
+        <div class="hero-line">
+          <h1>Denne uge <span>·</span> <strong id="week-number">Uge 44</strong></h1>
+          <div class="legend"><b>Tid</b><span>Aktivitet</span><span>Ressource</span></div>
+        </div>
+      </div>
+      <div class="live-pill"><i></i><span>LIVE FRA CONVENTUS</span><small>Opdateres automatisk</small></div>
+    </header>
+
+    <section class="top-days" aria-label="Mandag til torsdag">
+      <article class="day-card" data-day="mandag" style="--accent:#4fa9df"><div class="day-head"><div><h2>Mandag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="mandag"></strong><span data-count="mandag"></span></div></div><div class="bookings" data-bookings="mandag"><div class="loading">Henter bookinger…</div></div></article>
+      <article class="day-card" data-day="tirsdag" style="--accent:#55b86b"><div class="day-head"><div><h2>Tirsdag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="tirsdag"></strong><span data-count="tirsdag"></span></div></div><div class="bookings" data-bookings="tirsdag"><div class="loading">Henter bookinger…</div></div></article>
+      <article class="day-card" data-day="onsdag" style="--accent:#e6a936"><div class="day-head"><div><h2>Onsdag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="onsdag"></strong><span data-count="onsdag"></span></div></div><div class="bookings" data-bookings="onsdag"><div class="loading">Henter bookinger…</div></div></article>
+      <article class="day-card" data-day="torsdag" style="--accent:#8e70d7"><div class="day-head"><div><h2>Torsdag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="torsdag"></strong><span data-count="torsdag"></span></div></div><div class="bookings" data-bookings="torsdag"><div class="loading">Henter bookinger…</div></div></article>
+    </section>
+
+    <section class="bottom-days" aria-label="Fredag til søndag">
+      <article class="day-card wide" data-day="fredag" style="--accent:#df7777"><div class="day-head"><div><h2>Fredag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="fredag"></strong><span data-count="fredag"></span></div></div><div class="bookings" data-bookings="fredag"><div class="loading">Henter bookinger…</div></div></article>
+      <article class="day-card wide" data-day="lørdag" style="--accent:#4ca5bd"><div class="day-head"><div><h2>Lørdag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="lørdag"></strong><span data-count="lørdag"></span></div></div><div class="bookings" data-bookings="lørdag"><div class="loading">Henter bookinger…</div></div></article>
+      <article class="day-card wide" data-day="søndag" style="--accent:#64a66b"><div class="day-head"><div><h2>Søndag</h2><span class="today-pill">I DAG</span></div><div class="day-meta"><strong data-date="søndag"></strong><span data-count="søndag"></span></div></div><div class="bookings" data-bookings="søndag"><div class="loading">Henter bookinger…</div></div></article>
+    </section>
+
+    <section class="next-info" id="next-info" aria-live="polite">
+      <div class="info-kicker"><span class="spark">!</span><div><small>NÆSTE PRAKTISKE INFO</small><strong id="info-when">Henter…</strong></div></div>
+      <div class="info-main"><h3 id="info-title">Henter næste info fra Conventus…</h3><div id="info-summary" class="info-summary"></div></div>
+      <div class="info-source"><span>Conventus</span><small>7 dages oversigt</small></div>
+    </section>
+
+    <div class="source" id="week-source" aria-hidden="true"><script src="https://www.conventus.dk/dataudv/www/booking_v2_liste.php?forening=2944&vis=7&ressourcer=5394;5395;41893;41892;41895;41896;43929;43931;26597;40665;5396;22230;47117&kategorier=&kun_egne=false&skyggebookinger=false&gruppeAfd=&layout=relativ&columns=tid;titel;ressource&heads=day"></script></div>
+    <div class="source" id="info-source" aria-hidden="true"><script src="https://www.conventus.dk/dataudv/www/booking_v2_liste.php?forening=2944&vis=7&ressourcer=5394;5395;41893;41892;41895;41896;43929;43931;26597;40665;5396;22230;47117&kategorier=&kun_egne=false&skyggebookinger=false&gruppeAfd=&layout=relativ&columns=dato;tid;titel;info;ressource&heads=day"></script></div>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
