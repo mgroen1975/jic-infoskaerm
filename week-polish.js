@@ -15,13 +15,14 @@
     var a=resources.map(shortResource).filter(Boolean);
     if(a.length===2&&a.indexOf('25 m bassin')>-1&&a.indexOf('Varmtvand')>-1)return'25 m + varmtvand';
     if(a.length===2&&/^Hal [A-Z]$/i.test(a[0])&&/^Hal [A-Z]$/i.test(a[1]))return a[0]+' + '+a[1].replace(/^Hal\s+/i,'');
+    if(a.length===2&&a.indexOf('Gamma')>-1&&a.indexOf('Zeta')>-1)return'Gamma + Zeta';
     return a.join(' + ');
   }
   function addStyles(){
     if(document.getElementById('week-polish-style'))return;
     var st=document.createElement('style');
     st.id='week-polish-style';
-    st.textContent='\n.resource-short{display:none}\n.day-card.dense .resource-list,.day-card.very-dense .resource-list{display:none!important}\n.day-card.dense .booking,.day-card.very-dense .booking{display:block!important;padding:2px 0!important}\n.day-card.dense .booking-line,.day-card.very-dense .booking-line{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;column-gap:4px!important;align-items:start!important}\n.day-card.dense .booking-title,.day-card.very-dense .booking-title{grid-column:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:1}\n.day-card.dense .resource-short,.day-card.very-dense .resource-short{display:block;grid-column:2;margin-top:1px;color:#718697;font-size:8.7px;font-weight:700;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}\n.day-card.very-dense .resource-short{font-size:8.1px}\n.day-card.dense .booking{font-size:10.3px!important}\n.day-card.very-dense .booking{font-size:9.6px!important}\n';
+    st.textContent='\n.day-card:not(.note-card) .resource-list{display:none!important}\n.day-card:not(.note-card) .booking-line{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;column-gap:4px!important;align-items:start!important}\n.day-card:not(.note-card) .booking-title{grid-column:2}\n.day-card:not(.note-card) .resource-short{display:block;grid-column:2;margin-top:1px;color:#718697;font-size:9px;font-weight:700;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}\n.day-card.dense .booking,.day-card.very-dense .booking{display:block!important;padding:2px 0!important}\n.day-card.dense .booking-title,.day-card.very-dense .booking-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:1}\n.day-card.dense .resource-short{font-size:8.7px}\n.day-card.very-dense .resource-short{font-size:8.1px}\n.day-card.dense .booking{font-size:10.3px!important}\n.day-card.very-dense .booking{font-size:9.6px!important}\n';
     document.head.appendChild(st);
   }
   function polish(){
