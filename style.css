@@ -236,7 +236,7 @@ h2{font-size:54px}
 }
 .conventus-output{
   min-height:0;
-  padding:10px 12px 12px;
+  padding:8px 10px 10px;
   overflow:hidden;
 }
 .conventus-output,.conventus-output *{
@@ -279,9 +279,35 @@ h2{font-size:54px}
 }
 .conventus-output a{color:var(--blue)!important;text-decoration:none!important;font-weight:700!important}
 .conventus-output img{max-height:18px!important;width:auto!important}
-.conventus-output.dense table{border-spacing:0 2px!important}
-.conventus-output.dense th{padding:4px 6px!important;font-size:12px!important}
-.conventus-output.dense td{padding:5px 6px!important;font-size:12px!important;line-height:1.05!important}
-.conventus-output.very-dense table{border-spacing:0 1px!important}
-.conventus-output.very-dense th{padding:3px 5px!important;font-size:11px!important}
-.conventus-output.very-dense td{padding:3px 5px!important;font-size:11px!important;line-height:1.02!important}
+
+/* Specialbygget, kompakt visning af Dagen i dag */
+.today-list{display:flex;flex-direction:column;gap:3px;width:100%;min-height:0}
+.today-row{display:grid;grid-template-columns:108px minmax(0,1fr) 150px 188px;column-gap:10px;align-items:start;background:#f8fbfd;border:1px solid #e1ebf2;border-radius:9px;padding:6px 9px;min-height:31px;color:#173953}
+.today-time{font-size:12px;font-weight:900;color:var(--blue);white-space:nowrap;padding-top:1px}
+.today-main{min-width:0}
+.today-title{font-size:12.5px;font-weight:900;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.today-category{font-size:10.5px;font-weight:700;line-height:1.14;color:#587187;white-space:normal;overflow:hidden}
+.today-resource{display:flex;flex-direction:column;gap:1px;font-size:10.5px;font-weight:800;line-height:1.12;color:#31566f;min-width:0}
+.today-resource span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.today-info{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:start;margin-top:4px;padding:4px 6px;background:#fff7d6;border:1px solid #efdc9a;border-radius:7px;color:#554b2b}
+.today-info-label{font-size:8.5px;font-weight:900;letter-spacing:.05em;color:#9b6c00;background:#ffeaa0;border-radius:999px;padding:2px 5px;line-height:1.1}
+.today-info-groups{display:flex;flex-direction:column;gap:2px;min-width:0}
+.today-info-group{display:flex;gap:5px;align-items:baseline;font-size:9.5px;line-height:1.15;min-width:0}
+.today-info-group b{color:#8b6200;white-space:nowrap}
+.today-info-group span{white-space:normal}
+.today-empty{padding:20px;text-align:center;color:#718696;font-size:14px;font-style:italic}
+.today-list.dense{gap:2px}
+.today-list.dense .today-row{grid-template-columns:102px minmax(0,1fr) 140px 178px;column-gap:8px;padding:4px 8px;min-height:27px}
+.today-list.dense .today-time{font-size:11px}
+.today-list.dense .today-title{font-size:11.5px}
+.today-list.dense .today-category,.today-list.dense .today-resource{font-size:9.5px}
+.today-list.dense .today-info{margin-top:3px;padding:3px 5px}
+.today-list.dense .today-info-group{font-size:8.8px}
+.today-list.very-dense{gap:1px}
+.today-list.very-dense .today-row{grid-template-columns:96px minmax(0,1fr) 132px 170px;column-gap:7px;padding:3px 7px;min-height:24px;border-radius:7px}
+.today-list.very-dense .today-time{font-size:10px}
+.today-list.very-dense .today-title{font-size:10.5px;line-height:1.05}
+.today-list.very-dense .today-category,.today-list.very-dense .today-resource{font-size:8.8px;line-height:1.05}
+.today-list.very-dense .today-info{grid-template-columns:auto 1fr;margin-top:2px;padding:2px 4px;gap:4px}
+.today-list.very-dense .today-info-label{font-size:7.5px;padding:1px 4px}
+.today-list.very-dense .today-info-group{font-size:8px;line-height:1.08}
