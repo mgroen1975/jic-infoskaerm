@@ -11,48 +11,63 @@
   function dayName(y,m,d){return new Intl.DateTimeFormat('da-DK',{weekday:'long',day:'2-digit',month:'2-digit',timeZone:'UTC'}).format(new Date(Date.UTC(y,m-1,d)));}
   function ensureBox(){var card=document.querySelector('.note-card');if(!card)return null;var box=document.getElementById('next-info-highlight');if(box)return box;box=document.createElement('div');box.id='next-info-highlight';box.className='next-info-box';var head=card.querySelector('.day-head');if(head&&head.nextSibling)card.insertBefore(box,head.nextSibling);else card.appendChild(box);card.classList.add('has-next-info');return box;}
 
-  function splitItems(text){
-    var s=String(text||'').replace(/\r/g,'\n').trim();
+  function cleanItem(s){return String(s||'').trim().replace(/^[•·*]\s*/,'').replace(/^[-–—]\s*/,'').trim();}
+  function splitItems(s){
+    s=String(s||'').trim();
     if(!s)return [];
-    var parts=s.split(/\n+|\s+(?:-|–|—)\s+/).map(function(x){return norm(x).replace(/^[•·*-]\s*/,'');}).filter(Boolean);
-    return parts;
+    return s.split(/\s+(?:-|–|—)\s+/).map(cleanItem).filter(Boolean);
   }
 
   function parseChecklist(info){
     var s=String(info||'').replace(/\r/g,'\n').trim();
     if(!s)return [];
 
-    /* Conventus kan levere info både med <br> og som én lang tekst. Sørg for,
-       at et nyt klokkeslæt altid starter en ny gruppe. */
-    s=s.replace(/([^\n])\s+(?=\d{1,2}[:.]\d{2}\s*(?:-|–|—|:))/g,'$1\n');
+    /* Hvis Conventus har fladet teksten ud, starter hvert klokkeslæt på ny linje. */
+    s=s.replace(/(^|\s)([-•·*]?\s*\d{1,2}[:.]\d{2})(?=\s|$)/g,function(_,lead,time){return (lead?'\n':'')+time.trim();});
 
     var lines=s.split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);
     var groups=[];
     var current=null;
 
-    lines.forEach(function(line){
-      var tm=line.match(/^(\d{1,2}[:.]\d{2})\s*(?:-|–|—|:)\s*(.*)$/);
-      if(tm){
-        current={time:tm[1].replace('.',':'),items:[]};
-        groups.push(current);
-        splitItems(tm[2]).forEach(function(x){current.items.push(x);});
-      }else{
-        if(!current){current={time:'',items:[]};groups.push(current);}
-        splitItems(line).forEach(function(x){current.items.push(x);});
+    function startGroup(time){
+      current={time:String(time||'').replace('.',':'),items:[]};
+      groups.push(current);
+    }
+    function addItems(text){
+      if(!current)startGroup('');
+      splitItems(text).forEach(function(x){if(x)current.items.push(x);});
+    }
+
+    lines.forEach(function(raw){
+      var line=cleanItem(raw);
+      if(!line)return;
+
+      /* Fx "8:30" eller "- 10:30" */
+      var onlyTime=line.match(/^(\d{1,2}[:.]\d{2})$/);
+      if(onlyTime){startGroup(onlyTime[1]);return;}
+
+      /* Fx "8:30 - 1 kande isvand - 12 plastikkrus" */
+      var timeAndText=line.match(/^(\d{1,2}[:.]\d{2})\s*(?:-|–|—|:)\s*(.*)$/);
+      if(timeAndText){
+        startGroup(timeAndText[1]);
+        addItems(timeAndText[2]);
+        return;
       }
+
+      addItems(line);
     });
 
-    groups=groups.filter(function(g){return g.items.length;});
-    if(groups.length)return groups;
-    return [{time:'',items:splitItems(s)}];
+    groups=groups.filter(function(g){return g.items.length||g.time;});
+    return groups.length?groups:[{time:'',items:[norm(s)]}];
   }
 
   function checklistHtml(info){
     var groups=parseChecklist(info);
     return '<div class="next-info-checklist">'+groups.map(function(g){
-      return '<div class="info-group">'+
-        (g.time?'<div class="info-time">'+esc(g.time)+'</div>':'')+
-        '<ul>'+g.items.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
+      return '<section class="info-group">'+
+        (g.time?'<div class="info-time">kl. '+esc(g.time)+'</div>':'')+
+        (g.items.length?'<ul>'+g.items.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'')+
+        '</section>';
     }).join('')+'</div>';
   }
 
@@ -62,7 +77,7 @@
     if(!item){box.innerHTML='<div class="next-info-empty">Ingen kommende info '+(periodLabel||'')+'</div>';return;}
     var when=dayName(item.date.y,item.date.m,item.date.d)+' · kl. '+item.timeText;
     box.innerHTML='<div class="next-info-when">'+esc(when)+'</div><div class="next-info-title">'+esc(item.title)+'</div>'+checklistHtml(item.info);
-    setTimeout(function(){if(box.scrollHeight>box.clientHeight+2||card.scrollHeight>card.clientHeight+2)card.classList.add('dense-note');},50);
+    setTimeout(function(){if(box.scrollHeight>box.clientHeight+2||card.scrollHeight>card.clientHeight+2)card.classList.add('dense-note');},80);
   }
 
   function scanRoot(root){
