@@ -311,3 +311,62 @@ h2{font-size:54px}
 .today-list.very-dense .today-info{grid-template-columns:auto 1fr;margin-top:2px;padding:2px 4px;gap:4px}
 .today-list.very-dense .today-info-label{font-size:7.5px;padding:1px 4px}
 .today-list.very-dense .today-info-group{font-size:8px;line-height:1.08}
+
+/* Smart compact mode til meget travle ugedage. Kun kort der ellers ville overflowe bruger dette. */
+.day-card.dense,
+.day-card.very-dense{
+  padding:13px 9px 7px;
+}
+.day-card.dense .day-head,
+.day-card.very-dense .day-head{margin-bottom:5px}
+.day-card.dense .booking,
+.day-card.very-dense .booking{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 72px;
+  column-gap:5px;
+  align-items:start;
+  padding:2px 0;
+  line-height:1.03;
+}
+.day-card.dense .booking-line,
+.day-card.very-dense .booking-line{
+  min-width:0;
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:4px;
+}
+.day-card.dense .booking-title,
+.day-card.very-dense .booking-title{
+  -webkit-line-clamp:1;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.day-card.dense .resource-list,
+.day-card.very-dense .resource-list{
+  margin:0;
+  padding:0;
+  min-width:0;
+  max-width:72px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  gap:1px;
+  overflow:hidden;
+}
+.day-card.dense .resource-list li,
+.day-card.very-dense .resource-list li{
+  width:100%;
+  margin:0;
+  padding:0;
+  text-align:right;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:#718697;
+}
+.day-card.dense .resource-list li::before,
+.day-card.very-dense .resource-list li::before{display:none}
+.day-card.dense .booking{font-size:10px}
+.day-card.dense .resource-list li{font-size:8.4px}
+.day-card.very-dense .booking{font-size:9.2px}
+.day-card.very-dense .resource-list li{font-size:7.9px}
