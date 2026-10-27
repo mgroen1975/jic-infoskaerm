@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Jetsmark Idrætscenter – Dagen i dag</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <main class="screen">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Aktuelle bookinger</p>
+        <h1>Dagen i dag</h1>
+        <p class="today-date" id="today-date">Henter dagens dato…</p>
+      </div>
+      <div class="live-pill"><i></i><span>LIVE FRA CONVENTUS</span></div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-title">Dagens bookinger</div>
+      <div class="column-head" aria-hidden="true">
+        <span>Tid</span><span>Aktivitet / info</span><span>Gruppe</span><span>Ressource</span>
+      </div>
+      <div class="today-output" id="today-bookings">
+        <script type="text/javascript" src="https://www.conventus.dk/dataudv/www/booking_v2_liste.php?forening=2944&vis=1&ressourcer=5394;5395;41893;41892;41895;41896;43929;43931;26597;40665;5396;22230;47117&kategorier=&kun_egne=false&skyggebookinger=false&gruppeAfd=&layout=relativ&columns=skygge;dato;tid;titel;info;kategori;ressource;book&heads=day"></script>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
