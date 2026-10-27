@@ -22,7 +22,7 @@
     if(!screen||!stage)return;
     var v=viewport();
     var safe=.98;
-    var zoom=.85;
+    var zoom=.95;
     var s=Math.min(v.w/1920,v.h/1080)*safe*zoom;
     var rw=1920*s, rh=1080*s;
     var left=Math.max(0,(v.w-rw)/2);
