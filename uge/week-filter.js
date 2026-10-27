@@ -25,6 +25,7 @@
     root.querySelectorAll('tr').forEach(function(tr){
       if(tr.querySelector('th'))return;
       var d=parseDate(tr.textContent||'');
+      /* Bevar rækker uden sikker dato. Kun eksplicit daterede rækker uden for ugeintervallet fjernes. */
       if(!d)return;
       var t=d.getTime();
       if(t<range.start||t>range.end)tr.remove();
