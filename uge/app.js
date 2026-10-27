@@ -6,8 +6,18 @@
   function norm(s){return String(s||'').replace(/\s+/g,' ').trim();}
   function raw(el){return String((el&&(el.innerText||el.textContent))||'').replace(/\r/g,'').trim();}
   function esc(s){return String(s||'').replace(/[&<>\"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'})[c];});}
-  function scale(){document.documentElement.style.setProperty('--scale',String(Math.min(innerWidth/1920,innerHeight/1080)));}
-  scale();addEventListener('resize',scale);
+  function viewportSize(){
+    var vv=window.visualViewport;
+    var w=(vv&&vv.width)||document.documentElement.clientWidth||window.innerWidth||1920;
+    var h=(vv&&vv.height)||document.documentElement.clientHeight||window.innerHeight||1080;
+    return {w:w,h:h};
+  }
+  function scale(){var v=viewportSize();var s=Math.min(v.w/1920,v.h/1080);document.documentElement.style.setProperty('--scale',String(s));}
+  scale();
+  addEventListener('resize',scale);
+  addEventListener('orientationchange',function(){setTimeout(scale,100);setTimeout(scale,500);});
+  if(window.visualViewport)window.visualViewport.addEventListener('resize',scale);
+  setTimeout(scale,250);setTimeout(scale,1000);setTimeout(scale,2500);
 
   function localParts(){
     var p=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23',weekday:'short'}).formatToParts(new Date()),o={};
@@ -82,6 +92,6 @@
   }
 
   labels();
-  var tries=0,t=setInterval(function(){tries++;var week=parseWeek(),info=parseInfo();if(week&&info){clearInterval(t);renderWeek(week,info.map);renderNext(info.records);setTimeout(function(){document.querySelectorAll('.day-card').forEach(fit);},300);}else if(tries>60)clearInterval(t);},300);
+  var tries=0,t=setInterval(function(){tries++;var week=parseWeek(),info=parseInfo();if(week&&info){clearInterval(t);renderWeek(week,info.map);renderNext(info.records);setTimeout(function(){document.querySelectorAll('.day-card').forEach(fit);scale();},300);}else if(tries>60)clearInterval(t);},300);
   setInterval(function(){location.reload();},300000);
 })();
