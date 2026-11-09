@@ -14,7 +14,7 @@
   function parseDate(s){var m=String(s||'').match(/(\d{1,2})[-./](\d{1,2})[-./](\d{4})/);return m?{d:+m[1],m:+m[2],y:+m[3]}:null;}
   function targetDates(){var start=todayUTC(),out=[];for(var i=0;i<7;i++){var d=new Date(start);d.setUTCDate(start.getUTCDate()+i);out.push(dateObj(d));}return out;}
   function isTime(s){s=norm(s).replace(/\b\d{1,2}[-./]\d{1,2}[-./]\d{4}\b/g,'').trim();return /\b\d{1,2}[:.]\d{2}\b/.test(s);}
-  function displayTime(s){var r=String(s||'').match(/(\d{1,2}[:.]\d{2})\s*(?:-|–|—|til)\s*(\d{1,2}[:.]\d{2})/i);if(r)return r[1].replace('.',':')+'–'+r[2].replace('.',':');var one=String(s||'').match(/(\d{1,2}[:.]\d{2})/);return one?one[1].replace('.',':'):norm(s);}
+  function displayTime(s){s=String(s||'').replace(/\b\d{1,2}[-./]\d{1,2}[-./]\d{4}\b/g,' ');var r=s.match(/(\d{1,2}[:.]\d{2})\s*(?:-|–|—|til)\s*(\d{1,2}[:.]\d{2})/i);if(r)return r[1].replace('.',':')+'–'+r[2].replace('.',':');var one=String(s||'').match(/(\d{1,2}[:.]\d{2})/);return one?one[1].replace('.',':'):norm(s);}
   function dayName(x){return new Intl.DateTimeFormat('da-DK',{weekday:'long',timeZone:'UTC'}).format(new Date(Date.UTC(x.y,x.m-1,x.d))).replace(/^./,function(c){return c.toUpperCase();});}
   function shortDate(x){return new Intl.DateTimeFormat('da-DK',{day:'2-digit',month:'2-digit',timeZone:'UTC'}).format(new Date(Date.UTC(x.y,x.m-1,x.d)));}
   function shortDay(x){var n=dayName(x).slice(0,3)+'.';return n+' '+shortDate(x);}
