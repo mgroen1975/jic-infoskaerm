@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="300">
+<title>Jetsmark Idrætscenter · Foyer</title>
+<style>
+:root{--navy:#102d4a;--blue:#176da3;--line:#dce8f0;--ink:#19354e;--muted:#687d90}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);background:#edf5fa}
+#stage{width:100%;height:100%;display:flex;flex-direction:column;padding:2.2vh 2.5vw 1.4vh;gap:1.4vh}
+header{display:flex;align-items:center;justify-content:space-between;gap:3vw;background:#fff;border-radius:1vw;padding:1.6vh 2.2vw;box-shadow:0 8px 35px #173e5a0c;min-height:12vh}
+.brand{display:flex;align-items:center;gap:1.1vw}.mark{height:4.4vw;width:4.4vw;max-height:96px;max-width:96px;border-radius:1vw;background:linear-gradient(145deg,#208bc5,#113b66);color:#fff;display:grid;place-items:center;font-weight:900;font-size:clamp(30px,2.65vw,100px);letter-spacing:-.22em;padding-right:.25em}
+.brand-title{font-size:clamp(22px,2.25vw,92px);font-weight:850;letter-spacing:-.035em;line-height:1}.brand-sub{font-size:clamp(11px,.86vw,32px);letter-spacing:.21em;color:#5d788e;font-weight:750;margin-top:.7vh}
+.datebox{text-align:right}.weekday{font-weight:850;font-size:clamp(24px,2vw,80px);text-transform:capitalize}.date{font-size:clamp(16px,1.15vw,44px);color:var(--muted);margin-top:.5vh}
+main{display:flex;flex-direction:column;flex:1;min-height:0;background:#fff;border-radius:1vw;overflow:hidden;box-shadow:0 8px 35px #173e5a10}
+.heading{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(95deg,#123b62,#1974a9);color:#fff;padding:1.4vh 2.1vw;min-height:8vh}
+.heading h1{font-size:clamp(25px,2.15vw,80px);margin:0;font-weight:800;letter-spacing:-.025em}.live{font-size:clamp(12px,.85vw,34px);font-weight:750;letter-spacing:.11em;opacity:.9}.live:before{content:"";display:inline-block;width:.65em;height:.65em;background:#55db9e;border-radius:50%;margin-right:.7em}
+.colheads{display:grid;grid-template-columns:18% 57% 25%;padding:1.1vh 2vw;background:#e5f1f8;color:#476880;font-size:clamp(14px,1vw,42px);font-weight:800;text-transform:uppercase;letter-spacing:.09em}
+#list{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.booking{display:grid;grid-template-columns:18% 57% 25%;align-items:center;min-height:0;flex:1;max-height:14vh;padding:1vh 2vw;border-bottom:1px solid var(--line);gap:0}
+.booking:nth-child(even){background:#f6fafc}.booking:last-child{border:0}
+.time{font-size:clamp(20px,1.75vw,70px);font-weight:850;color:#126392;white-space:nowrap;letter-spacing:-.025em}
+.activity{font-size:clamp(18px,1.5vw,60px);font-weight:750;line-height:1.18;padding-right:1.4vw;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.resources{display:flex;gap:.4vw;flex-wrap:wrap;padding-left:.8vw}.resource{font-size:clamp(13px,1.03vw,42px);font-weight:750;background:#e0eff8;color:#15547d;padding:.55vh .65vw;border-radius:.35vw;line-height:1.15}
+.empty{display:grid;place-items:center;flex:1;color:#627d91;font-size:clamp(18px,1.7vw,64px);padding:2vw;text-align:center}
+#list.dense .booking{max-height:none}#list.dense .time{font-size:clamp(15px,1.36vw,55px)}#list.dense .activity{font-size:clamp(14px,1.14vw,48px)}#list.dense .resource{font-size:clamp(11px,.83vw,34px)}
+footer{height:5vh;display:flex;align-items:center;justify-content:space-between;padding:0 .8vw;color:#54718a;font-size:clamp(14px,1vw,40px);font-weight:700}
+footer .website{font-weight:900;color:#175b88;font-size:clamp(18px,1.3vw,52px);letter-spacing:.02em}
+#source{position:absolute;left:-99999px;top:0;opacity:0;pointer-events:none}
+@media(max-aspect-ratio:1/1){header{min-height:10vh}.colheads,.booking{grid-template-columns:25% 48% 27%}.heading{min-height:7vh}}
+</style>
+</head>
+<body>
+<div id="stage">
+<header>
+  <div class="brand"><div class="mark" aria-hidden="true">J</div><div><div class="brand-title">JETSMARK IDRÆTSCENTER</div><div class="brand-sub">BEVÆGELSE · FÆLLESSKAB · OPLEVELSER</div></div></div>
+  <div class="datebox"><div id="weekday" class="weekday"></div><div id="date" class="date"></div></div>
+</header>
+<main>
+  <div class="heading"><h1>Dagens aktiviteter</h1><div class="live">LIVE FRA CONVENTUS</div></div>
+  <div class="colheads"><span>Tidspunkt</span><span>Aktivitet</span><span>Lokale / område</span></div>
+  <div id="list"><div class="empty">Henter dagens aktiviteter fra Conventus …</div></div>
+</main>
+<footer><span>Velkommen til Jetsmark Idrætscenter</span><span class="website">www.jic.dk</span></footer>
+</div>
+<div id="source" aria-hidden="true">
+<script src="https://www.conventus.dk/dataudv/www/booking_v2_liste.php?forening=2944&vis=1&ressourcer=5394;5395;41893;41892;41895;41896;43929;43931;26597;40665;5396;22230;47117&kategorier=&kun_egne=false&skyggebookinger=false&gruppeAfd=&layout=relativ&columns=skygge;dato;tid;titel;info;kategori;ressource;book&heads=day"></script>
+</div>
+<script>
+(function(){
+const TZ='Europe/Copenhagen', list=document.getElementById('list');
+const fmt=new Intl.DateTimeFormat('da-DK',{timeZone:TZ,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+document.getElementById('weekday').textContent=fmt.split(' ')[0];
+document.getElementById('date').textContent=fmt.slice(fmt.indexOf(' ')+1);
+function norm(s){return String(s||'').replace(/\s+/g,' ').trim();}
+function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function parts(){const v={};new Intl.DateTimeFormat('en-GB',{timeZone:TZ,day:'2-digit',month:'2-digit',year:'numeric'}).formatToParts(new Date()).forEach(x=>v[x.type]=Number(x.value)||x.value);return v;}
+function isToday(s){const m=String(s).match(/(\d{1,2})[-./](\d{1,2})[-./](\d{4})/),p=parts();return !!m&&+m[1]===p.day&&+m[2]===p.month&&+m[3]===p.year;}
+function time(s){const m=String(s).match(/(\d{1,2}[:.]\d{2})\s*(?:-|–|—|til)\s*(\d{1,2}[:.]\d{2})/i);return m?m[1].replace('.',':')+'–'+m[2].replace('.',':'):((String(s).match(/\d{1,2}[:.]\d{2}/)||[])[0]||'').replace('.',':');}
+function mapping(table){const map={};table.querySelectorAll('tr').forEach(tr=>{if(Object.keys(map).length)return;[...tr.querySelectorAll('th')].forEach((th,i)=>{const n=norm(th.textContent).toLowerCase();if(n.includes('tid'))map.time=i;if(n.includes('titel'))map.title=i;if(n.includes('ressource'))map.resource=i;});});return map;}
+function read(){
+const tables=document.querySelectorAll('#source table');if(!tables.length)return null;
+const output=[],keys=new Map();
+tables.forEach(table=>{const h=mapping(table);table.querySelectorAll('tr').forEach(tr=>{
+if(tr.querySelector('th'))return;const cells=[...tr.cells],vals=cells.map(c=>norm(c.textContent));if(cells.length<2||!isToday(tr.textContent))return;
+const ix=h.time??vals.findIndex(s=>/\d{1,2}[:.]\d{2}/.test(s));if(ix<0)return;
+const t=time(vals[ix]),title=vals[h.title??(ix+1)];if(!t||!title)return;
+const res=vals[h.resource??(ix+4)]||'';
+const key=(t+'|'+title).toLowerCase();let item=keys.get(key);
+if(!item){item={t,title,resources:[]};keys.set(key,item);output.push(item);}
+let resource=norm(res);
+if(/Karlsvognen/i.test(resource)&&/(Gamma|Zeta)/i.test(tr.textContent))resource=resource.replace(/Mødelokale\s+Karlsvognen|Karlsvognen/ig,'').trim();
+if(resource&&!item.resources.includes(resource))item.resources.push(resource);
+});});
+output.sort((a,b)=>a.t.localeCompare(b.t,'da'));return output;
+}
+function render(){
+const data=read();if(!data)return false;
+if(!data.length){list.innerHTML='<div class="empty">Ingen aktiviteter registreret i dag</div>';return true;}
+list.innerHTML=data.map(x=>'<div class="booking"><div class="time">'+esc(x.t)+'</div><div class="activity">'+esc(x.title)+'</div><div class="resources">'+(x.resources.length?x.resources.map(r=>'<span class="resource">'+esc(r)+'</span>').join(''):'<span class="resource">—</span>')+'</div></div>').join('');
+if(data.length>8)list.classList.add('dense');return true;
+}
+let count=0;const poll=setInterval(()=>{count++;if(render()||count>=100){clearInterval(poll);if(count>=100&&list.textContent.includes('Henter'))list.innerHTML='<div class="empty">Kunne ikke hente dagens aktiviteter. Skærmen forsøger igen automatisk.</div>';}},300);
+})();
+</script>
+</body>
+</html>
