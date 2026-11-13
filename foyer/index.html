@@ -28,7 +28,25 @@ footer{height:5vh;display:flex;align-items:center;justify-content:space-between;
 footer .website{font-weight:900;color:#8D3717;font-size:clamp(18px,1.3vw,52px);letter-spacing:.02em}
 #source{position:absolute;left:-99999px;top:0;opacity:0;pointer-events:none}
 @media(max-aspect-ratio:1/1){header{min-height:10vh}.colheads,.booking{grid-template-columns:25% 48% 27%}.heading{min-height:7vh}}
-.official-logo{height:6.7vh;max-height:150px;width:auto;max-width:14vw;object-fit:contain;flex-shrink:0}.brand{gap:1.5vw}.heading-left{display:flex;align-items:center;gap:1.2vw;min-width:0}.heading-left .official-logo{height:5.9vh;max-height:110px;max-width:11vw;object-fit:contain;background:#fff;border-radius:.45vw;padding:.25vh .3vw}.booking .time,.booking .activity,.booking .resources{min-height:0}.booking .resource{white-space:nowrap;padding:.35vh .65vw}.booking .resources{overflow:hidden}.booking .activity{overflow:hidden;line-height:1.12}#list.very-dense .time{font-size:clamp(13px,1.07vw,42px)}#list.very-dense .activity{font-size:clamp(12px,.9vw,38px)}#list.very-dense .resource{font-size:clamp(10px,.7vw,29px);padding:.2vh .35vw}</style>
+.official-logo{height:6.7vh;max-height:150px;width:auto;max-width:14vw;object-fit:contain;flex-shrink:0}.brand{gap:1.5vw}.heading-left{display:flex;align-items:center;gap:1.2vw;min-width:0}.heading-left .official-logo{height:5.9vh;max-height:110px;max-width:11vw;object-fit:contain;background:#fff;border-radius:.45vw;padding:.25vh .3vw}.booking .time,.booking .activity,.booking .resources{min-height:0}.booking .resource{white-space:nowrap;padding:.35vh .65vw}.booking .resources{overflow:hidden}.booking .activity{overflow:hidden;line-height:1.12}#list.very-dense .time{font-size:clamp(13px,1.07vw,42px)}#list.very-dense .activity{font-size:clamp(12px,.9vw,38px)}#list.very-dense .resource{font-size:clamp(10px,.7vw,29px);padding:.2vh .35vw}
+/* Foyer: center every item in its row, both vertically and horizontally. */
+.colheads{align-items:center;text-align:center}
+.colheads>span{display:flex;align-items:center;justify-content:center;text-align:center}
+.booking{align-items:stretch}
+.booking>.time,.booking>.activity,.booking>.resources{
+  height:100%;min-height:0;min-width:0;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;align-self:stretch;box-sizing:border-box;
+  margin:0;padding-top:0;padding-bottom:0;
+}
+.booking>.activity{
+  -webkit-line-clamp:unset;-webkit-box-orient:initial;
+  overflow:hidden;line-height:1.1;padding-left:.6vw;padding-right:.6vw;
+}
+.booking>.resources{padding-left:.6vw;padding-right:.6vw;align-content:center;gap:.3vw}
+.booking>.time{line-height:1.1}
+.booking .resource{display:inline-flex;align-items:center;justify-content:center;line-height:1.15;max-height:100%}
+</style>
 </head>
 <body>
 <div id="stage">
