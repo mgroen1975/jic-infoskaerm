@@ -10,7 +10,7 @@
 <div id="stage">
   <main class="screen">
     <header class="hero">
-      <div class="hero-title">Kommende 7 dage</div>
+      <div class="hero-left"><div class="hero-title">Kommende 7 dage</div><time id="header-clock" class="header-clock" aria-label="Aktuelt klokkeslæt">--:--:--</time></div>
       <div class="hero-brand">JETSMARK IDRÆTSCENTER</div>
       <div class="live-pill"><i></i><span>LIVE FRA CONVENTUS</span></div>
     </header>
@@ -34,6 +34,16 @@
     <div class="source" id="info-source" aria-hidden="true"><script src="https://www.conventus.dk/dataudv/www/booking_v2_liste.php?forening=2944&vis=7&ressourcer=5394;5395;41893;41892;41895;41896;43929;43931;26597;40665;5396;22230;47117&kategorier=&kun_egne=false&skyggebookinger=false&gruppeAfd=&layout=relativ&columns=dato;tid;titel;info;ressource&heads=day"></script></div>
   </main>
 </div>
+<script>
+(function(){
+  var clock=document.getElementById('header-clock');
+  if(!clock)return;
+  var formatter=new Intl.DateTimeFormat('da-DK',{timeZone:'Europe/Copenhagen',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
+  function update(){clock.textContent=formatter.format(new Date());}
+  update();
+  setInterval(update,1000);
+})();
+</script>
 <script src="app.js"></script>
 <script src="tv-fit.js"></script>
 </body>
