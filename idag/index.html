@@ -13,6 +13,7 @@
       <div>
         <p class="today-date" id="today-date">Henter dagens dato…</p>
       </div>
+      <time id="header-clock" class="header-clock" aria-label="Aktuelt klokkeslæt">--:--:--</time>
       <div class="live-pill"><i></i><span>LIVE FRA CONVENTUS</span></div>
     </header>
 
@@ -27,6 +28,16 @@
     </section>
   </main>
 </div>
+<script>
+(function(){
+  var clock=document.getElementById('header-clock');
+  if(!clock)return;
+  var formatter=new Intl.DateTimeFormat('da-DK',{timeZone:'Europe/Copenhagen',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
+  function update(){clock.textContent=formatter.format(new Date());}
+  update();
+  setInterval(update,1000);
+})();
+</script>
 <script src="app.js"></script>
 </body>
 </html>
