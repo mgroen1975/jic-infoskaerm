@@ -13,7 +13,7 @@
       <div>
         <p class="today-date" id="today-date">Henter dagens dato…</p>
       </div>
-      <time id="header-clock" class="header-clock" aria-label="Aktuelt klokkeslæt">--:--:--</time>
+      <time id="header-clock" class="header-clock" aria-label="Aktuelt klokkeslæt og ugenummer">--:--:--</time>
       <div class="live-pill"><i></i><span>LIVE FRA CONVENTUS</span></div>
     </header>
 
@@ -33,7 +33,16 @@
   var clock=document.getElementById('header-clock');
   if(!clock)return;
   var formatter=new Intl.DateTimeFormat('da-DK',{timeZone:'Europe/Copenhagen',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
-  function update(){clock.textContent=formatter.format(new Date());}
+  var dateFormatter=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Copenhagen',year:'numeric',month:'2-digit',day:'2-digit'});
+  function isoWeek(now){
+    var parts=dateFormatter.formatToParts(now),p={};
+    parts.forEach(function(x){p[x.type]=x.value;});
+    var d=new Date(Date.UTC(+p.year,+p.month-1,+p.day));
+    d.setUTCDate(d.getUTCDate()+4-(d.getUTCDay()||7));
+    var yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    return Math.ceil((((d-yearStart)/86400000)+1)/7);
+  }
+  function update(){var now=new Date();clock.textContent=formatter.format(now)+' · Uge '+isoWeek(now);}
   update();
   setInterval(update,1000);
 })();
